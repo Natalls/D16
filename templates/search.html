@@ -1,0 +1,44 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+{% load custom_tags %}
+
+{% block title %}
+Поиск
+{% endblock title %}
+
+{% block content %}
+<br>
+<form action="" method="get">
+      {{ filterset.form.as_p }}
+      <input type="submit" value="Найти"/>
+</form>
+<hr>
+<table>
+    {% for post in search %}
+    <tr>
+        <td>{{ post.title|censor }}</td>
+        <td>{{ post.post_time|date:'d.m.y' }}</td>
+        <td>{{ post.post_text|censor|truncatewords:20 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% if page_obj.has_previous %}
+    <a href="?{% url_replace page=1 %}">1</a>
+    {% if page_obj.previous_page_number != 1 %}
+        ...
+        <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+    {% endif %}
+{% endif %}
+
+{{ page_obj.number }}
+
+{% if page_obj.has_next %}
+    <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+    {% if page_obj.next_page_number != page_obj.paginator.num_pages %}
+        ...
+        <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+    {% endif %}
+{% endif %}
+
+{% endblock content %}

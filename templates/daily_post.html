@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Оповещение </title>
+</head>
+<body>
+    <h2> Здравствуйте! Список публикаций за прошедшую неделю </h2>
+         <ul>
+             {% for post in posts %}
+                 <li><a href="{{ link }}{{ post.get_absolute_url }}">{{ post.tittle }}</a></li>
+             {% endfor %}
+         </ul>
+
+</body>
+</html>

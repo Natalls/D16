@@ -1,0 +1,20 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+Новости
+{% endblock title %}
+
+{% block content %}
+
+   {% if news_d %}
+       <h1> {{ news_d.title|censor }} </h1>
+       <hr> {{ news_d.post_text|censor }} </hr>
+       <h3> {{ news_d.post_time|date:"d.m.Y" }} </h3>
+
+   {% else %}
+       <h2>Ничего нового :(</h2>
+
+   {% endif %}
+{% endblock content %}
